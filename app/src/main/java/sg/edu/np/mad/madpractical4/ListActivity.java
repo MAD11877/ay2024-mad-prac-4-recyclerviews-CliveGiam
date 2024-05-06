@@ -14,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class ListActivity extends AppCompatActivity {
@@ -28,6 +29,17 @@ public class ListActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        ArrayList<User> list = new ArrayList<User>();
+
+        for (int i = 0; i<20; i++) {
+            Random initrand = new Random();
+            int namenum = initrand.nextInt(1000000);
+            int descnum = initrand.nextInt(1000000);
+            String Name = "Name" + String.valueOf(namenum);
+            String Desc = "Description" + String.valueOf(descnum);
+            User newuser = new User(Name, Desc, i, false);
+            list.add(newuser);
+        }
 
         ImageView imgView = findViewById(R.id.imageView2);
 
