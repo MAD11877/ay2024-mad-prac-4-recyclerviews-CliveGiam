@@ -13,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -41,32 +44,15 @@ public class ListActivity extends AppCompatActivity {
             list.add(newuser);
         }
 
-        ImageView imgView = findViewById(R.id.imageView2);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Profile");
-        builder.setMessage("MADness");
-        builder.setCancelable(true);
-        builder.setPositiveButton("View", new
-                DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int id){
-                        Random rand = new Random();
-                        int randomNum = rand.nextInt(1000000);
-                        String numStr = String.valueOf(randomNum);
-                        Intent mainActivity = new Intent(ListActivity.this, MainActivity.class);
-                        mainActivity.putExtra("Int", numStr);
-                        startActivity(mainActivity);
-                    }
-                });
-        builder.setNegativeButton("Close", null);
-        imgView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        UserAdapter uAdapter = new UserAdapter(list);
 
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-        });
+        LinearLayoutManager uLayoutManager = new LinearLayoutManager(this);
+
+        recyclerView.setLayoutManager(uLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(uAdapter);
 
     }
 }
