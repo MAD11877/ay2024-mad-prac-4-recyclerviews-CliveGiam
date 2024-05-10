@@ -14,7 +14,7 @@ Follow the instructions below to complete your app.
 Hint: You can use static variable. <br/>
 Using global static variable is not a good software engineering practice. Are you able to figure other ways of achieving these behaviours?
 
-![AlertDialog](/images/RV_alertSave.png)
+![AlertDialog](/images/RV_alertSave.png)    
 
 4. Modify the RecyclerView such that if the last digit of the name contains 7, a different layout is used as shown below. This new layout will have an additional `ImageView` that occupies the width of the screen and has a width-to-height ratio of 1:1.
 
