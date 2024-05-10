@@ -44,15 +44,16 @@ public class ListActivity extends AppCompatActivity {
             list.add(newuser);
         }
 
-
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        UserAdapter uAdapter = new UserAdapter(list);
+        LinearLayoutManager linLayoutManager = new LinearLayoutManager(this);
+        UserAdapter uAdapter = new UserAdapter(list, this);
 
-        LinearLayoutManager uLayoutManager = new LinearLayoutManager(this);
-
-        recyclerView.setLayoutManager(uLayoutManager);
+        recyclerView.setLayoutManager(linLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(uAdapter);
+
+
+
 
     }
 }

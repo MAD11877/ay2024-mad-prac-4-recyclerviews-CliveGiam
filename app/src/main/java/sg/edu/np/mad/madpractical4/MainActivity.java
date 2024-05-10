@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,29 +34,39 @@ public class MainActivity extends AppCompatActivity {
         TextView tvDescription = findViewById(R.id.tvDescription);
 
         Button btnFollow  = findViewById(R.id.btnFollow);
-
-        tvName.setText(user.name);
-        tvDescription.setText(user.description);
         btnFollow.setText("Follow");
+
+        Intent receive = getIntent();
+        String name = receive.getStringExtra("Name");
+        String desc = receive.getStringExtra("Description");
+
+
+        tvName.setText(name);
+        tvDescription.setText(desc);
+
+        Bundle tempUser = new Bundle();
         btnFollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 user.followed = !(user.followed);
-
+                Intent sendFollow = new Intent("User_follow");
                 if(user.followed) {
                     btnFollow.setText("Unfollow");
+                    tempUser.putBoolean("Followed", true);
                     Toast.makeText(getApplicationContext(), "Followed", Toast.LENGTH_LONG).show();
                 }
                 else {
                     btnFollow.setText("Follow");
+                    tempUser.putBoolean("Followed", false);
                     Toast.makeText(getApplicationContext(), "Unfollowed", Toast.LENGTH_LONG).show();
                 }
+                sendBroadcast(sendFollow);
+
+
             }
         });
 
-        Intent receive = getIntent();
-        String message = receive.getStringExtra("Int");
-        tvName.setText(user.name + " " + message);
+
     }
 
 }
